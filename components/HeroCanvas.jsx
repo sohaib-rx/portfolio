@@ -191,16 +191,37 @@ export default function HeroCanvas() {
     };
     scheme.addEventListener("change", onScheme);
 
+    // fade the canvas in on its first frame so the shader-compile stall
+    // stays invisible
+    renderer.domElement.style.opacity = "0";
+    renderer.domElement.style.transition = "opacity 0.8s ease";
+    const reveal = () => {
+      requestAnimationFrame(() => {
+        renderer.domElement.style.opacity = "1";
+      });
+    };
+
+    // wait for the preloader so the compile stall can't freeze the counter
     let io;
-    if (reduced) {
-      material.uniforms.uTime.value = 4;
-      render();
-    } else {
+    const begin = () => {
+      if (reduced) {
+        material.uniforms.uTime.value = 4;
+        render();
+        reveal();
+        return;
+      }
       io = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) startLoop();
         else stopLoop();
       });
       io.observe(mount);
+      reveal();
+    };
+
+    if (window.__preloaderDone) {
+      begin();
+    } else {
+      window.addEventListener("preloader:done", begin, { once: true });
     }
 
     const onResize = () => {
@@ -211,6 +232,7 @@ export default function HeroCanvas() {
     window.addEventListener("resize", onResize);
 
     return () => {
+      window.removeEventListener("preloader:done", begin);
       stopLoop();
       if (io) io.disconnect();
       observer.disconnect();

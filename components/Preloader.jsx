@@ -27,6 +27,7 @@ export default function Preloader() {
     tl.to(counter, {
       value: 100,
       duration: 1.1,
+      delay: 0.25,
       ease: "power2.inOut",
       onUpdate: () => {
         if (countRef.current) {
