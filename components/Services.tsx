@@ -3,7 +3,12 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 
-const SERVICES = [
+type Service = {
+  name: string;
+  desc: string;
+};
+
+const SERVICES: Service[] = [
   {
     name: "Frontend Engineering",
     desc: "React & Next.js apps — accessible, fast, and typed end to end.",
@@ -23,14 +28,14 @@ const SERVICES = [
 ];
 
 export default function Services() {
-  const rootRef = useRef(null);
+  const rootRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return;
 
     const ctx = gsap.context(() => {
-      gsap.utils.toArray(".service").forEach((row, i) => {
+      gsap.utils.toArray<HTMLElement>(".service").forEach((row, i) => {
         gsap.from(row, {
           y: 50,
           autoAlpha: 0,

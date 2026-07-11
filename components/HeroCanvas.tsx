@@ -79,12 +79,20 @@ const FRAGMENT = /* glsl */ `
   }
 `;
 
-const THEMES = {
+type ThemeName = "dark" | "light";
+
+type ThemeColors = {
+  bg: string;
+  colorA: string;
+  colorB: string;
+};
+
+const THEMES: Record<ThemeName, ThemeColors> = {
   dark: { bg: "#0c110e", colorA: "#1b2d23", colorB: "#2bbd87" },
   light: { bg: "#f2f3ee", colorA: "#d3ddd2", colorB: "#0b8a5f" },
 };
 
-function currentTheme() {
+function currentTheme(): ThemeName {
   const explicit = document.documentElement.dataset.theme;
   if (explicit === "dark" || explicit === "light") return explicit;
   return window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -93,7 +101,7 @@ function currentTheme() {
 }
 
 export default function HeroCanvas() {
-  const mountRef = useRef(null);
+  const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const mount = mountRef.current;
@@ -141,14 +149,14 @@ export default function HeroCanvas() {
     applyTheme();
 
     const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
-    const onPointerMove = (e) => {
+    const onPointerMove = (e: PointerEvent) => {
       mouse.tx = (e.clientX / window.innerWidth - 0.5) * 2;
       mouse.ty = (e.clientY / window.innerHeight - 0.5) * 2;
     };
     window.addEventListener("pointermove", onPointerMove, { passive: true });
 
     const clock = new THREE.Clock();
-    let frameId;
+    let frameId = 0;
     let running = false;
 
     const render = () => {
@@ -202,7 +210,7 @@ export default function HeroCanvas() {
     };
 
     // wait for the preloader so the compile stall can't freeze the counter
-    let io;
+    let io: IntersectionObserver | undefined;
     const begin = () => {
       if (reduced) {
         material.uniforms.uTime.value = 4;

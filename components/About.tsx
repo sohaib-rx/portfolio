@@ -6,14 +6,20 @@ import { gsap } from "@/lib/gsap";
 const TEXT =
   "I'm Sohaib — a full-stack developer who's happiest when the whole pipeline hums: clean schemas, fast APIs and interfaces that don't make people think. I build MERN and PERN apps end to end, from the first migration to the final deploy.";
 
-const STATS = [
+type Stat = {
+  value: number;
+  suffix: string;
+  label: string;
+};
+
+const STATS: Stat[] = [
   { value: 4, suffix: "+", label: "Years writing code" },
   { value: 30, suffix: "+", label: "Projects shipped" },
   { value: 15, suffix: "", label: "APIs in production" },
 ];
 
 export default function About() {
-  const rootRef = useRef(null);
+  const rootRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -36,7 +42,7 @@ export default function About() {
         },
       });
 
-      gsap.utils.toArray(".stat__value").forEach((el) => {
+      gsap.utils.toArray<HTMLElement>(".stat__value").forEach((el) => {
         const target = Number(el.dataset.value);
         const suffix = el.dataset.suffix || "";
         const counter = { value: 0 };

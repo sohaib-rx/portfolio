@@ -3,12 +3,17 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 
-export default function Marquee({ items, accent = false }) {
-  const trackRef = useRef(null);
+type MarqueeProps = {
+  items: string[];
+  accent?: boolean;
+};
+
+export default function Marquee({ items, accent = false }: MarqueeProps) {
+  const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
+    if (reduced || !trackRef.current) return;
 
     const tween = gsap.to(trackRef.current, {
       xPercent: -50,
@@ -17,7 +22,9 @@ export default function Marquee({ items, accent = false }) {
       repeat: -1,
     });
 
-    return () => tween.kill();
+    return () => {
+      tween.kill();
+    };
   }, [accent]);
 
   const row = [...items, ...items];

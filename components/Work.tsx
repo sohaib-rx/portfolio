@@ -1,9 +1,16 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap } from "@/lib/gsap";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 
-const PROJECTS = [
+type Project = {
+  name: string;
+  desc: string;
+  chips: string[];
+  image: string;
+};
+
+const PROJECTS: Project[] = [
   {
     name: "Cartly",
     desc: "Headless e-commerce platform with cart, checkout and subscription billing — 40k orders processed in year one.",
@@ -31,11 +38,11 @@ const PROJECTS = [
 ];
 
 export default function Work() {
-  const rootRef = useRef(null);
-  const pinRef = useRef(null);
-  const trackRef = useRef(null);
-  const fillRef = useRef(null);
-  const countRef = useRef(null);
+  const rootRef = useRef<HTMLElement>(null);
+  const pinRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const fillRef = useRef<HTMLElement>(null);
+  const countRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const mm = gsap.matchMedia(rootRef);
@@ -45,20 +52,23 @@ export default function Work() {
       "(min-width: 900px) and (prefers-reduced-motion: no-preference)",
       () => {
         const track = trackRef.current;
+        const pin = pinRef.current;
+        if (!track || !pin) return;
+
         const distance = () => track.scrollWidth - window.innerWidth;
 
         gsap.to(track, {
           x: () => -distance(),
           ease: "none",
           scrollTrigger: {
-            trigger: pinRef.current,
+            trigger: pin,
             start: "top top",
             end: () => "+=" + distance(),
             pin: true,
             scrub: 1,
             anticipatePin: 1,
             invalidateOnRefresh: true,
-            onUpdate: (self) => {
+            onUpdate: (self: ScrollTrigger) => {
               if (fillRef.current) {
                 fillRef.current.style.transform = `scaleX(${self.progress})`;
               }
@@ -75,7 +85,7 @@ export default function Work() {
           yPercent: 110,
           duration: 1,
           ease: "power4.out",
-          scrollTrigger: { trigger: pinRef.current, start: "top 80%" },
+          scrollTrigger: { trigger: pin, start: "top 80%" },
         });
       }
     );
@@ -83,7 +93,7 @@ export default function Work() {
     mm.add(
       "(max-width: 899px) and (prefers-reduced-motion: no-preference)",
       () => {
-        gsap.utils.toArray(".panel").forEach((panel) => {
+        gsap.utils.toArray<HTMLElement>(".panel").forEach((panel) => {
           gsap.from(panel, {
             y: 70,
             autoAlpha: 0,

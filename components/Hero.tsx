@@ -7,10 +7,12 @@ import { gsap } from "@/lib/gsap";
 const HeroCanvas = dynamic(() => import("./HeroCanvas"), { ssr: false });
 
 export default function Hero() {
-  const rootRef = useRef(null);
+  const rootRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const root = rootRef.current;
+    if (!root) return;
+
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const chrome = root.querySelectorAll(".hero__meta, .hero__bottom, .hero__scroll");
     const lines = root.querySelectorAll(".hero__line > span");

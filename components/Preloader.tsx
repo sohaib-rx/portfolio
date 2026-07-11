@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 
 export default function Preloader() {
-  const rootRef = useRef(null);
-  const countRef = useRef(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const countRef = useRef<HTMLDivElement>(null);
   const [done, setDone] = useState(false);
 
   useEffect(() => {
@@ -34,14 +34,15 @@ export default function Preloader() {
           countRef.current.textContent = String(Math.round(counter.value)).padStart(3, "0");
         }
       },
-    })
-      .to(rootRef.current, {
-        yPercent: -100,
-        duration: 0.9,
-        ease: "power4.inOut",
-      });
+    }).to(rootRef.current, {
+      yPercent: -100,
+      duration: 0.9,
+      ease: "power4.inOut",
+    });
 
-    return () => tl.kill();
+    return () => {
+      tl.kill();
+    };
   }, []);
 
   if (done) return null;

@@ -4,14 +4,14 @@ import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 
 export default function Contact() {
-  const rootRef = useRef(null);
+  const rootRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return;
 
     const ctx = gsap.context(() => {
-      gsap.utils.toArray(".reveal-line > span").forEach((span, i) => {
+      gsap.utils.toArray<HTMLElement>(".reveal-line > span").forEach((span, i) => {
         gsap.from(span, {
           yPercent: 110,
           duration: 1,

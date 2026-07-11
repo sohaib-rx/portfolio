@@ -11,12 +11,12 @@ export default function SmoothScroll() {
 
     const lenis = new Lenis({
       duration: 1.1,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
 
     lenis.on("scroll", ScrollTrigger.update);
 
-    const raf = (time) => {
+    const raf = (time: number) => {
       lenis.raf(time * 1000);
     };
     gsap.ticker.add(raf);

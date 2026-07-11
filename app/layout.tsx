@@ -1,3 +1,5 @@
+import type { Metadata, Viewport } from "next";
+import type { ReactNode } from "react";
 import { Archivo_Black, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -20,13 +22,13 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Sohaib Ahmad — Full-Stack Developer (MERN / PERN)",
   description:
     "Portfolio of Sohaib Ahmad, a full-stack developer building React frontends, Node.js APIs and PostgreSQL/MongoDB data layers — from schema to screen.",
 };
 
-export const viewport = {
+export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
@@ -37,7 +39,7 @@ export const viewport = {
 
 const themeInit = `try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}`;
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
