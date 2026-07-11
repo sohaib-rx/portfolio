@@ -7,30 +7,26 @@ const PROJECTS = [
   {
     name: "Cartly",
     desc: "Headless e-commerce platform with cart, checkout and subscription billing — 40k orders processed in year one.",
-    year: "2026",
     chips: ["React", "Node.js", "MongoDB", "Stripe"],
-    art: "linear-gradient(135deg, #065f46 0%, #10b981 55%, #a7f3d0 100%)",
+    image: "/projects/cartly.svg",
   },
   {
     name: "Ledgr",
     desc: "Multi-tenant invoicing SaaS with role-based access, PDF pipelines and bank-grade audit logs.",
-    year: "2025",
     chips: ["PostgreSQL", "Express", "React", "Node.js"],
-    art: "linear-gradient(140deg, #1e3a8a 0%, #3b82f6 55%, #a5f3fc 100%)",
+    image: "/projects/ledgr.svg",
   },
   {
     name: "Pulse",
     desc: "Realtime analytics dashboards streaming a million events a day over websockets.",
-    year: "2025",
     chips: ["Next.js", "Socket.io", "Redis", "Timescale"],
-    art: "linear-gradient(130deg, #9a3412 0%, #f97316 50%, #fde68a 100%)",
+    image: "/projects/pulse.svg",
   },
   {
     name: "Stacko",
     desc: "Kanban for engineering teams with end-to-end type safety, from database rows to drag-and-drop.",
-    year: "2024",
     chips: ["PERN", "tRPC", "Prisma", "Docker"],
-    art: "linear-gradient(145deg, #581c87 0%, #a855f7 50%, #f0abfc 100%)",
+    image: "/projects/stacko.svg",
   },
 ];
 
@@ -135,15 +131,11 @@ export default function Work() {
                 </a>
               </div>
               <div className="panel__media">
-                <div className="panel__art" style={{ background: project.art }} />
-                <span className="panel__year">{project.year}</span>
-                <div className="panel__mock" aria-hidden="true">
-                  <i />
-                  <i />
-                  <i />
-                  <i />
-                  <i />
-                </div>
+                <img
+                  src={project.image}
+                  alt={`${project.name} — screenshot`}
+                  loading="lazy"
+                />
               </div>
             </article>
           ))}
