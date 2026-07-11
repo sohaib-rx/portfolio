@@ -1,0 +1,19 @@
+{
+  "name": "amara-voss-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "gsap": "^3.12.7",
+    "lenis": "^1.1.20",
+    "next": "^15.3.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "three": "^0.177.0"
+  }
+}
