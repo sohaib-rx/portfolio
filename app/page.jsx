@@ -19,14 +19,24 @@ export default function Home() {
       <main>
         <Hero />
         <Marquee
-          items={["Interfaces", "Motion", "Design Systems", "Prototypes", "Art Direction"]}
+          items={[
+            "React",
+            "Next.js",
+            "TypeScript",
+            "Node.js",
+            "Express",
+            "PostgreSQL",
+            "MongoDB",
+            "Redis",
+            "Docker",
+          ]}
         />
         <Work />
         <About />
         <Services />
         <Marquee
           accent
-          items={["Open for collaborations", "Freelance 2026", "Open for collaborations", "Freelance 2026"]}
+          items={["Open to opportunities", "Remote friendly", "Open to opportunities", "Remote friendly"]}
         />
         <Contact />
       </main>

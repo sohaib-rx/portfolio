@@ -4,12 +4,12 @@ import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 
 const TEXT =
-  "I'm Amara — a designer who believes great products are felt before they are understood. For eight years I've helped startups and studios turn complex problems into interfaces that feel effortless, expressive and alive.";
+  "I'm Sohaib — a full-stack developer who's happiest when the whole pipeline hums: clean schemas, fast APIs and interfaces that don't make people think. I build MERN and PERN apps end to end, from the first migration to the final deploy.";
 
 const STATS = [
-  { value: 8, suffix: "", label: "Years of practice" },
-  { value: 46, suffix: "+", label: "Projects shipped" },
-  { value: 12, suffix: "", label: "Design awards" },
+  { value: 4, suffix: "+", label: "Years writing code" },
+  { value: 30, suffix: "+", label: "Projects shipped" },
+  { value: 15, suffix: "", label: "APIs in production" },
 ];
 
 export default function About() {
@@ -59,7 +59,7 @@ export default function About() {
     <section className="section" id="about" ref={rootRef}>
       <div className="container">
         <p className="label" style={{ marginBottom: "2rem" }}>
-          About — The short version
+          About — <span className="accent">$ whoami</span>
         </p>
         <p className="about__text">
           {TEXT.split(" ").map((word, i) => (

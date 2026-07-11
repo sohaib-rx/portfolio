@@ -5,20 +5,20 @@ import { gsap } from "@/lib/gsap";
 
 const SERVICES = [
   {
-    name: "Product Design",
-    desc: "From messy brief to shippable product — research, UX flows, UI craft.",
+    name: "Frontend Engineering",
+    desc: "React & Next.js apps — accessible, fast, and typed end to end.",
   },
   {
-    name: "Interaction & Motion",
-    desc: "Micro-interactions and motion language that make interfaces feel alive.",
+    name: "APIs & Backends",
+    desc: "REST and GraphQL services in Node.js/Express that stay up under load.",
   },
   {
-    name: "Design Systems",
-    desc: "Scalable component libraries and tokens your team will actually use.",
+    name: "Data & Databases",
+    desc: "PostgreSQL and MongoDB schema design, queries and migrations.",
   },
   {
-    name: "Creative Direction",
-    desc: "Visual identity, art direction and campaigns for digital-first brands.",
+    name: "DevOps & Delivery",
+    desc: "Docker, CI/CD pipelines and cloud deploys that ship on every merge.",
   },
 ];
 
@@ -51,10 +51,10 @@ export default function Services() {
         <div className="section__head">
           <h2 className="section__title">
             <span>
-              What I <span className="accent">do</span>
+              What I <span className="accent">ship</span>
             </span>
           </h2>
-          <p className="label">Capabilities</p>
+          <p className="label">The stack, covered</p>
         </div>
       </div>
       <div>

@@ -40,6 +40,27 @@ const FRAGMENT = /* glsl */ `
   }
 `;
 
+const THEMES = {
+  dark: {
+    colorA: "#2a332e",
+    colorB: "#35e0a1",
+    blending: THREE.AdditiveBlending,
+  },
+  light: {
+    colorA: "#b9c2ba",
+    colorB: "#057a55",
+    blending: THREE.NormalBlending,
+  },
+};
+
+function currentTheme() {
+  const explicit = document.documentElement.dataset.theme;
+  if (explicit === "dark" || explicit === "light") return explicit;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
 export default function HeroCanvas() {
   const mountRef = useRef(null);
 
@@ -87,13 +108,29 @@ export default function HeroCanvas() {
       fragmentShader: FRAGMENT,
       transparent: true,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
       uniforms: {
         uTime: { value: 0 },
-        uColorA: { value: new THREE.Color("#3a3a40") },
-        uColorB: { value: new THREE.Color("#d3f34b") },
+        uColorA: { value: new THREE.Color() },
+        uColorB: { value: new THREE.Color() },
       },
     });
+
+    const applyTheme = () => {
+      const t = THEMES[currentTheme()];
+      material.uniforms.uColorA.value.set(t.colorA);
+      material.uniforms.uColorB.value.set(t.colorB);
+      material.blending = t.blending;
+      material.needsUpdate = true;
+    };
+    applyTheme();
+
+    const observer = new MutationObserver(applyTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+    const scheme = window.matchMedia("(prefers-color-scheme: dark)");
+    scheme.addEventListener("change", applyTheme);
 
     const points = new THREE.Points(geometry, material);
     points.rotation.x = -Math.PI / 2.35;
@@ -128,6 +165,12 @@ export default function HeroCanvas() {
     if (reduced) {
       material.uniforms.uTime.value = 2;
       renderer.render(scene, camera);
+      // re-render single frame on theme change
+      const staticObserver = new MutationObserver(() => render());
+      staticObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["data-theme"],
+      });
     } else {
       loop();
     }
@@ -144,6 +187,8 @@ export default function HeroCanvas() {
 
     return () => {
       cancelAnimationFrame(frameId);
+      observer.disconnect();
+      scheme.removeEventListener("change", applyTheme);
       window.removeEventListener("resize", onResize);
       window.removeEventListener("pointermove", onPointerMove);
       geometry.dispose();

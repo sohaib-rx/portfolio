@@ -1,10 +1,11 @@
-import { Syne, Space_Grotesk } from "next/font/google";
+import { Archivo_Black, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const syne = Syne({
+const archivo = Archivo_Black({
+  weight: "400",
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-syne",
+  variable: "--font-archivo",
 });
 
 const grotesk = Space_Grotesk({
@@ -13,22 +14,38 @@ const grotesk = Space_Grotesk({
   variable: "--font-grotesk",
 });
 
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-jetbrains",
+});
+
 export const metadata = {
-  title: "Amara Voss — UI/UX & Interaction Designer",
+  title: "Sohaib Ahmad — Full-Stack Developer (MERN / PERN)",
   description:
-    "Portfolio of Amara Voss, a digital product and interaction designer crafting interfaces that feel human. Based in Amsterdam, working worldwide.",
+    "Portfolio of Sohaib Ahmad, a full-stack developer building React frontends, Node.js APIs and PostgreSQL/MongoDB data layers — from schema to screen.",
 };
 
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0b0b0d",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0c110e" },
+    { media: "(prefers-color-scheme: light)", color: "#f2f3ee" },
+  ],
 };
+
+const themeInit = `try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}`;
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${syne.variable} ${grotesk.variable}`}>
+    <html
+      lang="en"
+      className={`${archivo.variable} ${grotesk.variable} ${jetbrains.variable}`}
+      suppressHydrationWarning
+    >
       <body>
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         {children}
         <div className="grain" aria-hidden="true" />
       </body>

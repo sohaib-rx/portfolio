@@ -59,33 +59,34 @@ export default function Hero() {
       <div className="hero__inner">
         <div className="hero__meta">
           <p className="label">
-            Amara Voss — UI/UX &amp; Interaction Designer
+            Sohaib Ahmad — Full-Stack Developer
             <br />
-            Amsterdam, NL
+            MERN / PERN
           </p>
           <p className="label">Portfolio ’26</p>
         </div>
         <h1 className="hero__title">
           <span className="hero__line">
-            <span>Making</span>
+            <span>From Schema</span>
           </span>
           <span className="hero__line">
-            <span className="outline">Digital</span>
+            <span className="outline">To Screen</span>
           </span>
           <span className="hero__line">
             <span>
-              Feel <em>Human</em>
+              Full-<em>Stack</em>
             </span>
           </span>
         </h1>
         <div className="hero__bottom">
           <p className="hero__tagline">
-            I design interfaces, interactions and design systems for products
-            people actually enjoy using.
+            React frontends, Node.js APIs and the data layers underneath —{" "}
+            <code>Postgres</code> or <code>Mongo</code>, I build and ship the
+            whole thing.
           </p>
           <a href="#contact" className="hero__status">
             <span className="pulse" aria-hidden="true" />
-            Available for work
+            Open to work
           </a>
         </div>
       </div>

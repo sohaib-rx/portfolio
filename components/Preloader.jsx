@@ -48,7 +48,7 @@ export default function Preloader() {
   return (
     <div className="preloader" ref={rootRef}>
       <div className="preloader__name">
-        Amara Voss<span className="accent">.</span>
+        sohaib<span className="accent">.dev</span>
       </div>
       <div className="preloader__count" ref={countRef}>
         000

@@ -36,26 +36,27 @@ export default function Contact() {
   return (
     <footer className="contact" id="contact" ref={rootRef}>
       <div className="container">
-        <p className="label contact__kicker">Got a project in mind?</p>
+        <p className="label contact__kicker">Got a product to build?</p>
         <h2 className="contact__title">
           <span className="reveal-line">
-            <span>Let’s make</span>
+            <span>Let’s ship</span>
           </span>
           <span className="reveal-line">
             <span>
-              something <span className="outline">rare</span>
+              something <span className="outline">solid</span>
             </span>
           </span>
         </h2>
-        <a className="contact__email" href="mailto:hello@amaravoss.studio">
-          hello@amaravoss.studio
+        <a className="contact__email" href="mailto:sohaibahmed.revnix@gmail.com">
+          sohaibahmed.revnix@gmail.com
         </a>
       </div>
       <div className="footer">
-        <span>© 2026 Amara Voss — All rights reserved</span>
+        <span>© 2026 Sohaib Ahmad — Built with Next.js</span>
         <div className="footer__socials">
-          <a href="#top">Dribbble</a>
-          <a href="#top">Behance</a>
+          <a href="https://github.com/sohaib-rx" target="_blank" rel="noreferrer">
+            GitHub
+          </a>
           <a href="#top">LinkedIn</a>
           <a href="#top">X</a>
         </div>
