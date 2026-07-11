@@ -6,97 +6,138 @@ import { gsap } from "@/lib/gsap";
 const PROJECTS = [
   {
     name: "Cartly",
-    tags: "E-commerce · MERN + Stripe",
+    desc: "Headless e-commerce platform with cart, checkout and subscription billing — 40k orders processed in year one.",
     year: "2026",
+    chips: ["React", "Node.js", "MongoDB", "Stripe"],
     art: "linear-gradient(135deg, #065f46 0%, #10b981 55%, #a7f3d0 100%)",
   },
   {
     name: "Ledgr",
-    tags: "Invoicing SaaS · PERN",
+    desc: "Multi-tenant invoicing SaaS with role-based access, PDF pipelines and bank-grade audit logs.",
     year: "2025",
+    chips: ["PostgreSQL", "Express", "React", "Node.js"],
     art: "linear-gradient(140deg, #1e3a8a 0%, #3b82f6 55%, #a5f3fc 100%)",
   },
   {
     name: "Pulse",
-    tags: "Realtime Analytics · Next.js + Socket.io",
+    desc: "Realtime analytics dashboards streaming a million events a day over websockets.",
     year: "2025",
+    chips: ["Next.js", "Socket.io", "Redis", "Timescale"],
     art: "linear-gradient(130deg, #9a3412 0%, #f97316 50%, #fde68a 100%)",
   },
   {
     name: "Stacko",
-    tags: "Team Kanban · PERN + tRPC",
+    desc: "Kanban for engineering teams with end-to-end type safety, from database rows to drag-and-drop.",
     year: "2024",
+    chips: ["PERN", "tRPC", "Prisma", "Docker"],
     art: "linear-gradient(145deg, #581c87 0%, #a855f7 50%, #f0abfc 100%)",
   },
 ];
 
 export default function Work() {
   const rootRef = useRef(null);
+  const pinRef = useRef(null);
+  const trackRef = useRef(null);
+  const fillRef = useRef(null);
+  const countRef = useRef(null);
 
   useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
+    const mm = gsap.matchMedia(rootRef);
 
-    const ctx = gsap.context(() => {
-      gsap.utils.toArray(".section__title > span").forEach((span) => {
-        gsap.from(span, {
+    // must match the @media block in globals.css exactly
+    mm.add(
+      "(min-width: 900px) and (prefers-reduced-motion: no-preference)",
+      () => {
+        const track = trackRef.current;
+        const distance = () => track.scrollWidth - window.innerWidth;
+
+        gsap.to(track, {
+          x: () => -distance(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: pinRef.current,
+            start: "top top",
+            end: () => "+=" + distance(),
+            pin: true,
+            scrub: 1,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              if (fillRef.current) {
+                fillRef.current.style.transform = `scaleX(${self.progress})`;
+              }
+              if (countRef.current) {
+                const idx =
+                  Math.round(self.progress * (PROJECTS.length - 1)) + 1;
+                countRef.current.textContent = `0${idx}`;
+              }
+            },
+          },
+        });
+
+        gsap.from(".section__title > span", {
           yPercent: 110,
           duration: 1,
           ease: "power4.out",
-          scrollTrigger: { trigger: span, start: "top 88%" },
+          scrollTrigger: { trigger: pinRef.current, start: "top 80%" },
         });
-      });
+      }
+    );
 
-      gsap.utils.toArray(".project").forEach((card) => {
-        gsap.from(card, {
-          y: 80,
-          autoAlpha: 0,
-          duration: 1.1,
-          ease: "power3.out",
-          scrollTrigger: { trigger: card, start: "top 88%" },
+    mm.add(
+      "(max-width: 899px) and (prefers-reduced-motion: no-preference)",
+      () => {
+        gsap.utils.toArray(".panel").forEach((panel) => {
+          gsap.from(panel, {
+            y: 70,
+            autoAlpha: 0,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: { trigger: panel, start: "top 88%" },
+          });
         });
+      }
+    );
 
-        const art = card.querySelector(".project__art");
-        gsap.fromTo(
-          art,
-          { yPercent: -8 },
-          {
-            yPercent: 8,
-            ease: "none",
-            scrollTrigger: {
-              trigger: card,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-            },
-          }
-        );
-      });
-    }, rootRef);
-
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (
-    <section className="section" id="work" ref={rootRef}>
-      <div className="container">
-        <div className="section__head">
+    <section className="showcase" id="work" ref={rootRef}>
+      <div className="showcase__pin" ref={pinRef}>
+        <div className="showcase__head">
           <h2 className="section__title">
             <span>
               Selected <span className="accent">Builds</span>
             </span>
           </h2>
-          <p className="label">Full-stack · 2024 — 2026</p>
+          <p className="showcase__count">
+            <em ref={countRef}>01</em> — 0{PROJECTS.length}
+          </p>
         </div>
-        <div className="work__grid">
+        <div className="showcase__track" ref={trackRef}>
           {PROJECTS.map((project, i) => (
-            <a href="#contact" className="project" key={project.name}>
-              <div className="project__media">
-                <div className="project__art" style={{ background: project.art }} />
-                <span className="project__num">
-                  {String(i + 1).padStart(2, "0")} / {project.year}
+            <article className="panel" key={project.name}>
+              <div className="panel__info">
+                <span className="panel__num" aria-hidden="true">
+                  0{i + 1}
                 </span>
-                <div className="project__mock" aria-hidden="true">
+                <h3 className="panel__name">{project.name}</h3>
+                <p className="panel__desc">{project.desc}</p>
+                <div className="panel__chips">
+                  {project.chips.map((chip) => (
+                    <span className="chip" key={chip}>
+                      {chip}
+                    </span>
+                  ))}
+                </div>
+                <a className="panel__link" href="#contact">
+                  View case study →
+                </a>
+              </div>
+              <div className="panel__media">
+                <div className="panel__art" style={{ background: project.art }} />
+                <span className="panel__year">{project.year}</span>
+                <div className="panel__mock" aria-hidden="true">
                   <i />
                   <i />
                   <i />
@@ -104,12 +145,11 @@ export default function Work() {
                   <i />
                 </div>
               </div>
-              <div className="project__info">
-                <h3 className="project__name">{project.name}</h3>
-                <p className="project__tags">{project.tags}</p>
-              </div>
-            </a>
+            </article>
           ))}
+        </div>
+        <div className="showcase__progress" aria-hidden="true">
+          <i ref={fillRef} />
         </div>
       </div>
     </section>
