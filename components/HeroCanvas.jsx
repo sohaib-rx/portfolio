@@ -149,6 +149,7 @@ export default function HeroCanvas() {
 
     const clock = new THREE.Clock();
     let frameId;
+    let running = false;
 
     const render = () => {
       material.uniforms.uTime.value = clock.getElapsedTime();
@@ -160,7 +161,19 @@ export default function HeroCanvas() {
 
     const loop = () => {
       render();
-      frameId = requestAnimationFrame(loop);
+      if (running) frameId = requestAnimationFrame(loop);
+    };
+
+    // only render while the hero is on screen — keeps scrolling below smooth
+    const startLoop = () => {
+      if (!running) {
+        running = true;
+        frameId = requestAnimationFrame(loop);
+      }
+    };
+    const stopLoop = () => {
+      running = false;
+      cancelAnimationFrame(frameId);
     };
 
     const observer = new MutationObserver(() => {
@@ -178,11 +191,16 @@ export default function HeroCanvas() {
     };
     scheme.addEventListener("change", onScheme);
 
+    let io;
     if (reduced) {
       material.uniforms.uTime.value = 4;
       render();
     } else {
-      loop();
+      io = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) startLoop();
+        else stopLoop();
+      });
+      io.observe(mount);
     }
 
     const onResize = () => {
@@ -193,7 +211,8 @@ export default function HeroCanvas() {
     window.addEventListener("resize", onResize);
 
     return () => {
-      cancelAnimationFrame(frameId);
+      stopLoop();
+      if (io) io.disconnect();
       observer.disconnect();
       scheme.removeEventListener("change", onScheme);
       window.removeEventListener("resize", onResize);

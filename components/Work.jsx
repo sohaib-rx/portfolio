@@ -56,6 +56,7 @@ export default function Work() {
             end: () => "+=" + distance(),
             pin: true,
             scrub: 1,
+            anticipatePin: 1,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
               if (fillRef.current) {
