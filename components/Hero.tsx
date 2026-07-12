@@ -62,8 +62,8 @@ export default function Hero() {
         <div className="hero__meta">
           <p className="label">
             Sohaib Ahmad — Full-Stack Developer
-            <br />
-            MERN / PERN
+            <br className="hero__meta-br" />
+            <span className="hero__meta-stack">MERN / PERN</span>
           </p>
           <p className="label">Portfolio ’26</p>
         </div>
