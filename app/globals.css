@@ -426,7 +426,7 @@ canvas {
   font-weight: 400;
   /* scale with width AND height so the hero always fits one screen:
      the svh term caps the title on wide-but-short viewports (laptops) */
-  font-size: clamp(2.4rem, min(11.5vw, 34svh - 160px), 11rem);
+  font-size: clamp(2.4rem, min(11.5vw, 43svh - 180px), 11rem);
   line-height: 0.95;
   letter-spacing: -0.01em;
   text-transform: uppercase;
@@ -497,6 +497,26 @@ canvas {
 @keyframes pulse {
   0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent); }
   50% { box-shadow: 0 0 0 7px transparent; }
+}
+
+/* short desktop/laptop viewports: reclaim vertical space around the
+   title so the type itself can stay large */
+@media (min-width: 641px) and (max-height: 940px) {
+  .hero {
+    padding-bottom: 1.5rem;
+  }
+
+  .hero__meta {
+    margin-bottom: 1.25rem;
+  }
+
+  .hero__bottom {
+    margin-top: 1.5rem;
+  }
+
+  .hero__tagline {
+    font-size: 0.9rem;
+  }
 }
 
 /* very short viewports (landscape phones): compress the hero rhythm */
