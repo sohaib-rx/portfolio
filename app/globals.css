@@ -411,12 +411,18 @@ canvas {
   z-index: 1;
 }
 
+/* pinned just below the nav, at the top of the hero */
 .hero__meta {
+  position: absolute;
+  top: clamp(6rem, 9vh, 7rem);
+  left: 0;
+  right: 0;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 1rem;
-  margin-bottom: clamp(1.5rem, 4vh, 3rem);
+  padding-inline: var(--edge);
 }
 
 .hero__meta .label:last-child {
@@ -516,15 +522,6 @@ canvas {
     padding-bottom: 1.5rem;
   }
 
-  .hero__meta {
-    margin-bottom: 1rem;
-  }
-
-  .hero__meta-br,
-  .hero__meta-stack {
-    display: none;
-  }
-
   .hero__bottom {
     margin-top: 1.25rem;
   }
@@ -542,7 +539,7 @@ canvas {
   }
 
   .hero__meta {
-    margin-bottom: 1rem;
+    top: 5.25rem;
   }
 
   .hero__bottom {

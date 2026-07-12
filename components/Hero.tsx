@@ -58,15 +58,15 @@ export default function Hero() {
   return (
     <section className="hero" id="top" ref={rootRef}>
       <HeroCanvas />
+      <div className="hero__meta">
+        <p className="label">
+          Sohaib Ahmad — Full-Stack Developer
+          <br className="hero__meta-br" />
+          <span className="hero__meta-stack">MERN / PERN</span>
+        </p>
+        <p className="label">Portfolio ’26</p>
+      </div>
       <div className="hero__inner">
-        <div className="hero__meta">
-          <p className="label">
-            Sohaib Ahmad — Full-Stack Developer
-            <br className="hero__meta-br" />
-            <span className="hero__meta-stack">MERN / PERN</span>
-          </p>
-          <p className="label">Portfolio ’26</p>
-        </div>
         <h1 className="hero__title">
           <span className="hero__line">
             <span>From Schema</span>
