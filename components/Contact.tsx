@@ -47,18 +47,20 @@ export default function Contact() {
             </span>
           </span>
         </h2>
-        <a className="contact__email" href="mailto:sohaibahmed.revnix@gmail.com">
-          sohaibahmed.revnix@gmail.com
+        <a className="contact__email" href="mailto:muzzamilhassan302@gmail.com">
+          muzzamilhassan302@gmail.com
         </a>
       </div>
       <div className="footer">
-        <span>© 2026 Sohaib Ahmad — Built with Next.js</span>
+        <span>© 2026 Muzzamil Hassan — Built with Next.js</span>
         <div className="footer__socials">
-          <a href="https://github.com/sohaib-rx" target="_blank" rel="noreferrer">
+          <a href="https://github.com/muzzamilhassan" target="_blank" rel="noreferrer">
             GitHub
           </a>
-          <a href="#top">LinkedIn</a>
-          <a href="#top">X</a>
+          <a href="https://linkedin.com/in/muzzamilhassan" target="_blank" rel="noreferrer">
+            LinkedIn
+          </a>
+          <a href="mailto:muzzamilhassan302@gmail.com">Email</a>
         </div>
         <a href="#top">Back to top ↑</a>
       </div>

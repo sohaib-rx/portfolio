@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 
 const TEXT =
-  "I'm Sohaib — a full-stack developer who's happiest when the whole pipeline hums: clean schemas, fast APIs and interfaces that don't make people think. I build MERN and PERN apps end to end, from the first migration to the final deploy.";
+  "I'm Muzzamil — a full-stack developer with 3+ years shipping production web apps end to end on the JavaScript / TypeScript stack. React & Next.js on the front, Node.js, Express and NestJS on the back. I've built SaaS platforms, headless CMS systems and e-commerce for real clients — from the first migration to the final deploy.";
 
 type Stat = {
   value: number;
@@ -13,9 +13,9 @@ type Stat = {
 };
 
 const STATS: Stat[] = [
-  { value: 4, suffix: "+", label: "Years writing code" },
-  { value: 30, suffix: "+", label: "Projects shipped" },
-  { value: 15, suffix: "", label: "APIs in production" },
+  { value: 3, suffix: "+", label: "Years of experience" },
+  { value: 7, suffix: "", label: "Products shipped" },
+  { value: 5, suffix: "", label: "Databases in production" },
 ];
 
 export default function About() {

@@ -23,9 +23,9 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sohaib Ahmad — Full-Stack Developer (MERN / PERN)",
+  title: "Muzzamil Hassan — Full-Stack Developer (MERN / PERN)",
   description:
-    "Portfolio of Sohaib Ahmad, a full-stack developer building React frontends, Node.js APIs and PostgreSQL/MongoDB data layers — from schema to screen.",
+    "Portfolio of Muzzamil Hassan, a full-stack developer with 3+ years building React & Next.js frontends, Node.js / NestJS APIs and PostgreSQL/MongoDB data layers — from schema to screen.",
 };
 
 export const viewport: Viewport = {

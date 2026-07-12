@@ -35,7 +35,7 @@ export default function Nav() {
   return (
     <header className="nav">
       <a href="#top" className="nav__logo">
-        sohaib<span className="accent">.dev</span>
+        muzzamil<span className="accent">.dev</span>
       </a>
       <nav className="nav__links" aria-label="Main">
         <span className="nav__time" suppressHydrationWarning>

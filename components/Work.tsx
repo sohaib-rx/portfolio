@@ -12,28 +12,28 @@ type Project = {
 
 const PROJECTS: Project[] = [
   {
-    name: "Cartly",
-    desc: "Headless e-commerce platform with cart, checkout and subscription billing — 40k orders processed in year one.",
-    chips: ["React", "Node.js", "MongoDB", "Stripe"],
-    image: "/projects/cartly.svg",
+    name: "Nextly",
+    desc: "TypeScript-first headless CMS framework inside Next.js — code-defined schemas plus a drag-and-drop visual builder, RBAC, and pluggable Postgres/MySQL/SQLite adapters.",
+    chips: ["Next.js", "TypeScript", "Drizzle ORM", "Docker"],
+    image: "/projects/nextly.svg",
   },
   {
-    name: "Ledgr",
-    desc: "Multi-tenant invoicing SaaS with role-based access, PDF pipelines and bank-grade audit logs.",
-    chips: ["PostgreSQL", "Express", "React", "Node.js"],
-    image: "/projects/ledgr.svg",
+    name: "RextAI",
+    desc: "AI content-intelligence SaaS with an E-E-A-T-aware article editor and one-click auto-publish to WordPress, Webflow and Ghost.",
+    chips: ["Next.js", "LangChain", "OpenAI", "Node.js"],
+    image: "/projects/rextai.svg",
   },
   {
-    name: "Pulse",
-    desc: "Realtime analytics dashboards streaming a million events a day over websockets.",
-    chips: ["Next.js", "Socket.io", "Redis", "Timescale"],
-    image: "/projects/pulse.svg",
+    name: "HireIQ",
+    desc: "AI-powered recruitment and candidate-evaluation platform built on LangGraph agent workflows.",
+    chips: ["Next.js", "TypeScript", "LangGraph", "OpenAI"],
+    image: "/projects/hireiq.svg",
   },
   {
-    name: "Stacko",
-    desc: "Kanban for engineering teams with end-to-end type safety, from database rows to drag-and-drop.",
-    chips: ["PERN", "tRPC", "Prisma", "Docker"],
-    image: "/projects/stacko.svg",
+    name: "4Rivers Equipment",
+    desc: "Enterprise e-commerce and equipment-rental platform with Stripe checkout and Google Maps location search.",
+    chips: ["Next.js", "Redux Toolkit", "Stripe", "Google Maps"],
+    image: "/projects/4rivers.svg",
   },
 ];
 

@@ -24,10 +24,12 @@ export default function Home() {
             "Next.js",
             "TypeScript",
             "Node.js",
+            "NestJS",
             "Express",
             "PostgreSQL",
             "MongoDB",
-            "Redis",
+            "Drizzle ORM",
+            "Tailwind CSS",
             "Docker",
           ]}
         />

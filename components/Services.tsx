@@ -11,19 +11,19 @@ type Service = {
 const SERVICES: Service[] = [
   {
     name: "Frontend Engineering",
-    desc: "React & Next.js apps — accessible, fast, and typed end to end.",
+    desc: "Next.js App Router, Server Components and SSR/ISR — pixel-perfect from Figma, typed, a11y and SEO-ready.",
   },
   {
     name: "APIs & Backends",
-    desc: "REST and GraphQL services in Node.js/Express that stay up under load.",
+    desc: "REST services in Node.js, Express and NestJS with JWT / OAuth2 auth and role-based access control.",
   },
   {
     name: "Data & Databases",
-    desc: "PostgreSQL and MongoDB schema design, queries and migrations.",
+    desc: "PostgreSQL, MongoDB, MySQL and SQLite — schema design, Drizzle ORM and pluggable multi-DB adapters.",
   },
   {
-    name: "DevOps & Delivery",
-    desc: "Docker, CI/CD pipelines and cloud deploys that ship on every merge.",
+    name: "Cloud & Delivery",
+    desc: "Vercel CI/CD and Edge Functions, Docker and GitHub Actions that ship on every merge.",
   },
 ];
 

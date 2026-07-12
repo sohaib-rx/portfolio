@@ -60,7 +60,7 @@ export default function Hero() {
       <HeroCanvas />
       <div className="hero__meta">
         <p className="label">
-          Sohaib Ahmad — Full-Stack Developer
+          Muzzamil Hassan — Full-Stack Developer
           <br className="hero__meta-br" />
           <span className="hero__meta-stack">MERN / PERN</span>
         </p>
@@ -82,9 +82,9 @@ export default function Hero() {
         </h1>
         <div className="hero__bottom">
           <p className="hero__tagline">
-            React frontends, Node.js APIs and the data layers underneath —{" "}
-            <code>Postgres</code> or <code>Mongo</code>, I build and ship the
-            whole thing.
+            React &amp; Next.js frontends, Node.js / NestJS APIs and the data
+            layer underneath — <code>Postgres</code> or <code>Mongo</code>, I
+            build and ship the whole thing.
           </p>
           <a href="#contact" className="hero__status">
             <span className="pulse" aria-hidden="true" />
