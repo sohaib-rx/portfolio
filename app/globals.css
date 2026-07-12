@@ -45,6 +45,10 @@
   --font-body: var(--font-grotesk), "Space Grotesk", sans-serif;
   --font-mono: var(--font-jetbrains), "JetBrains Mono", monospace;
   --pad: clamp(1.25rem, 4vw, 4rem);
+  /* cap content on large screens: side padding grows once the viewport
+     exceeds --content-max, centering everything */
+  --content-max: 1520px;
+  --edge: max(var(--pad), calc((100vw - var(--content-max)) / 2 + var(--pad)));
   --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
@@ -113,7 +117,7 @@ canvas {
 
 .container {
   width: 100%;
-  padding-inline: var(--pad);
+  padding-inline: var(--edge);
   margin-inline: auto;
 }
 
@@ -160,7 +164,7 @@ canvas {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  padding: var(--pad);
+  padding: var(--pad) var(--edge);
 }
 
 .preloader__name {
@@ -236,7 +240,7 @@ canvas {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: clamp(1rem, 2.5vw, 1.75rem) var(--pad);
+  padding: clamp(1rem, 2.5vw, 1.75rem) var(--edge);
   background: linear-gradient(
     to bottom,
     color-mix(in srgb, var(--bg) 82%, transparent),
@@ -355,8 +359,7 @@ canvas {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: var(--pad);
-  padding-bottom: clamp(2rem, 5vh, 4rem);
+  padding: var(--pad) var(--edge) clamp(2rem, 5vh, 4rem);
   overflow: hidden;
 }
 
@@ -462,7 +465,7 @@ canvas {
 
 .hero__scroll {
   position: absolute;
-  right: var(--pad);
+  right: var(--edge);
   top: 42%;
   z-index: 1;
   font-family: var(--font-mono);
@@ -568,7 +571,7 @@ canvas {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
-  padding-inline: var(--pad);
+  padding-inline: var(--edge);
   margin-bottom: clamp(2.5rem, 6vh, 4rem);
 }
 
@@ -597,7 +600,7 @@ canvas {
   grid-template-columns: 1fr;
   gap: clamp(1.5rem, 3vw, 4rem);
   align-items: center;
-  padding-inline: var(--pad);
+  padding-inline: var(--edge);
 }
 
 .panel__info {
@@ -693,7 +696,7 @@ canvas {
   display: none;
   height: 2px;
   background: var(--line);
-  margin: clamp(2rem, 5vh, 3.5rem) var(--pad) 0;
+  margin: clamp(2rem, 5vh, 3.5rem) var(--edge) 0;
 }
 
 .showcase__progress i {
@@ -726,12 +729,13 @@ canvas {
     flex-direction: row;
     gap: 0;
     width: max-content;
-    padding-right: calc(100vw - min(88vw, 1280px));
+    /* center the first and last panel within the viewport */
+    padding-inline: calc((100vw - min(88vw, var(--content-max))) / 2);
   }
 
   .panel {
     grid-template-columns: 0.9fr 1.1fr;
-    width: min(88vw, 1280px);
+    width: min(88vw, var(--content-max));
     padding-inline: var(--pad);
   }
 
@@ -776,6 +780,8 @@ canvas {
   background: var(--line);
   border-block: 1px solid var(--line);
   margin-top: clamp(3rem, 8vh, 6rem);
+  max-width: var(--content-max);
+  margin-inline: auto;
 }
 
 .stat {
@@ -810,7 +816,7 @@ canvas {
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: clamp(1rem, 4vw, 3rem);
-  padding: clamp(1.4rem, 3.5vh, 2.4rem) var(--pad);
+  padding: clamp(1.4rem, 3.5vh, 2.4rem) var(--edge);
   border-top: 1px solid var(--line);
   position: relative;
   overflow: hidden;
@@ -923,7 +929,7 @@ canvas {
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
-  padding: clamp(1.5rem, 4vh, 2.5rem) var(--pad);
+  padding: clamp(1.5rem, 4vh, 2.5rem) var(--edge);
   margin-top: clamp(4rem, 10vh, 7rem);
   border-top: 1px solid var(--line);
   font-family: var(--font-mono);
