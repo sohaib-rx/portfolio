@@ -842,6 +842,123 @@ canvas {
   }
 }
 
+/* ---------- work: "view more" expandable grid ---------- */
+
+.showcase__more {
+  padding-inline: var(--edge);
+  margin-top: clamp(2.5rem, 6vh, 4.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* animate open/closed by transitioning the grid track from 0fr to 1fr */
+.more-wrap {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.6s var(--ease-out);
+}
+
+.more-wrap[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+
+.more {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.more-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  padding-bottom: clamp(2rem, 5vh, 3rem);
+}
+
+.more-card {
+  border-top: 1px solid var(--accent);
+  padding-top: 1.25rem;
+}
+
+.more-card__num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+.more-card__name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+  line-height: 1;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+}
+
+.more-card__tagline {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+.more-card__desc {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+  max-width: 36ch;
+}
+
+.more-card__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1rem;
+}
+
+.more-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.85rem 1.5rem;
+  transition: border-color 0.3s, color 0.3s, background-color 0.3s;
+}
+
+.more-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.more-toggle__icon {
+  transition: transform 0.4s var(--ease-out);
+}
+
+.more-toggle.is-open .more-toggle__icon {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 860px) {
+  .more-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .more-card {
+    padding-block: 1.25rem;
+  }
+}
+
 /* ---------- about ---------- */
 
 .about__text {

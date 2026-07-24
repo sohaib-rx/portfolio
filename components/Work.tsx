@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 type Project = {
@@ -8,6 +8,13 @@ type Project = {
   desc: string;
   chips: string[];
   image: string;
+};
+
+type MoreProject = {
+  name: string;
+  tagline: string;
+  desc: string;
+  chips: string[];
 };
 
 const PROJECTS: Project[] = [
@@ -37,12 +44,34 @@ const PROJECTS: Project[] = [
   },
 ];
 
+const MORE_PROJECTS: MoreProject[] = [
+  {
+    name: "21Century Equipment",
+    tagline: "B2B Equipment Management Platform",
+    desc: "B2B equipment management platform with Stripe billing and Google Maps-based inventory and location search.",
+    chips: ["Next.js", "Redux Toolkit", "Stripe", "Google Maps"],
+  },
+  {
+    name: "CodexSpot",
+    tagline: "Developer Knowledge & Resource Hub",
+    desc: "A knowledge base and resource hub for developers to share code snippets, guides and tooling.",
+    chips: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS"],
+  },
+  {
+    name: "Shopify CRO",
+    tagline: "Conversion-Rate Optimization",
+    desc: "High-converting Shopify storefront work — fast, polished landing experiences tuned for conversion.",
+    chips: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+  },
+];
+
 export default function Work() {
   const rootRef = useRef<HTMLElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const fillRef = useRef<HTMLElement>(null);
   const countRef = useRef<HTMLElement>(null);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const mm = gsap.matchMedia(rootRef);
@@ -108,6 +137,12 @@ export default function Work() {
     return () => mm.revert();
   }, []);
 
+  // recompute pinned-scroll distances after the "more" grid expands/collapses
+  useEffect(() => {
+    const id = window.setTimeout(() => ScrollTrigger.refresh(), 650);
+    return () => window.clearTimeout(id);
+  }, [expanded]);
+
   return (
     <section className="showcase" id="work" ref={rootRef}>
       <div className="showcase__pin" ref={pinRef}>
@@ -154,6 +189,44 @@ export default function Work() {
         <div className="showcase__progress" aria-hidden="true">
           <i ref={fillRef} />
         </div>
+      </div>
+
+      <div className="showcase__more">
+        <div className="more-wrap" data-open={expanded}>
+          <div className="more" inert={!expanded}>
+            <div className="more-grid">
+              {MORE_PROJECTS.map((project, i) => (
+                <article className="more-card" key={project.name}>
+                  <span className="more-card__num">
+                    0{PROJECTS.length + i + 1}
+                  </span>
+                  <h3 className="more-card__name">{project.name}</h3>
+                  <p className="more-card__tagline">{project.tagline}</p>
+                  <p className="more-card__desc">{project.desc}</p>
+                  <div className="more-card__chips">
+                    {project.chips.map((chip) => (
+                      <span className="chip" key={chip}>
+                        {chip}
+                      </span>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className={`more-toggle${expanded ? " is-open" : ""}`}
+          onClick={() => setExpanded((v) => !v)}
+          aria-expanded={expanded}
+        >
+          {expanded ? "Show less" : `View ${MORE_PROJECTS.length} more projects`}
+          <span className="more-toggle__icon" aria-hidden="true">
+            ↓
+          </span>
+        </button>
       </div>
     </section>
   );
