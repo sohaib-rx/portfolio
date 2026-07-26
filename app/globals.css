@@ -57,9 +57,11 @@
      during swap, a classic scrollbar that 100vw doesn't account for).
      Re-measure this if the hero copy changes. */
   --hero-title-em: 8.4;
-  /* width budget: the headline box is exactly 100vw - 2 * --pad, so this is
-     the largest font-size that keeps the longest line on one line */
-  --hero-title-fit: calc((100vw - 2 * var(--pad)) / var(--hero-title-em));
+  /* Largest font-size that keeps the longest line on one line. 100cqi is the
+     headline column's own width, so this stays correct however the column is
+     bounded — by --content-max on wide monitors, by --pad on narrow ones — and
+     unlike 100vw it excludes the scrollbar. Resolves against .hero__inner. */
+  --hero-title-fit: calc(100cqi / var(--hero-title-em));
   --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
@@ -418,6 +420,9 @@ canvas {
 .hero__inner {
   position: relative;
   z-index: 1;
+  /* makes 100cqi inside the hero resolve to this column's real width, which is
+     what the headline has to fit into */
+  container-type: inline-size;
 }
 
 /* pinned just below the nav, at the top of the hero */
@@ -444,14 +449,13 @@ canvas {
   /* consistent scale on every screen: ~11.5vw of the full viewport, capped by
      the height budget (--hero-title-cap) so the hero fits one screen, and by
      the width budget (--hero-title-fit) so the longest line never wraps.
-     The negative margin lets the headline break out of the content column on
-     large monitors. */
+     The headline sits in the same column as the nav, meta row and tagline —
+     it is bounded by --content-max like everything else. */
   font-size: clamp(
     2rem,
     min(11.5vw, var(--hero-title-cap), var(--hero-title-fit)),
     20rem
   );
-  margin-inline: calc(var(--pad) - var(--edge));
   line-height: 0.95;
   letter-spacing: -0.01em;
   text-transform: uppercase;
